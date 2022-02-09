@@ -1,16 +1,17 @@
 package net.carrossos.plib.utils.concurrent;
 
+import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PoolFactory implements ThreadFactory {
 
-	private static final Logger LOGGER = LogManager.getLogger(PoolFactory.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private static final Map<String, AtomicInteger> GLOBAL_COUNTER = new HashMap<>();
 
@@ -21,7 +22,7 @@ public class PoolFactory implements ThreadFactory {
 	private final AtomicInteger counter = new AtomicInteger(0);
 
 	private void errorHandler(Thread thread, Throwable t) {
-		LOGGER.fatal("Pool '" + name + "' failure! Error caught in thread '" + thread.getName() + "'", t);
+		LOGGER.error("Pool '" + name + "' failure! Error caught in thread '" + thread.getName() + "'", t);
 	}
 
 	@Override

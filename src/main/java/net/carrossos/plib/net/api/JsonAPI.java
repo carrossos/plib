@@ -1,6 +1,7 @@
 package net.carrossos.plib.net.api;
 
 import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Type;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -22,8 +23,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
@@ -32,7 +33,7 @@ import net.carrossos.plib.net.http.HttpURL;
 
 public class JsonAPI {
 
-	private static final Logger LOGGER = LogManager.getLogger(JsonAPI.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private static final Duration ASYNC_TIMEOUT = Duration.ofMinutes(3);
 

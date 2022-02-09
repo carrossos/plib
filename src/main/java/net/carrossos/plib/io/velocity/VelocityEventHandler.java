@@ -1,15 +1,17 @@
 package net.carrossos.plib.io.velocity;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.lang.invoke.MethodHandles;
+
 import org.apache.velocity.app.event.InvalidReferenceEventHandler;
 import org.apache.velocity.app.event.MethodExceptionEventHandler;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.util.introspection.Info;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class VelocityEventHandler implements InvalidReferenceEventHandler, MethodExceptionEventHandler {
 
-	private static final Logger LOGGER = LogManager.getLogger(VelocityEventHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private boolean strict;
 

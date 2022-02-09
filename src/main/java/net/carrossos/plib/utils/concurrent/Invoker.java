@@ -1,6 +1,7 @@
 package net.carrossos.plib.utils.concurrent;
 
 import java.io.Closeable;
+import java.lang.invoke.MethodHandles;
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,14 +10,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.carrossos.plib.utils.function.ThrowingRunnable;
 
 public class Invoker implements Closeable {
 
-	private static final Logger LOGGER = LogManager.getLogger(Invoker.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private final long interval;
 

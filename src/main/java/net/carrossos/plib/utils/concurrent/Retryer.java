@@ -1,18 +1,19 @@
 package net.carrossos.plib.utils.concurrent;
 
+import java.lang.invoke.MethodHandles;
 import java.time.Duration;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.carrossos.plib.utils.function.ThrowingRunnable;
 
 public class Retryer {
 
-	private static final Logger LOGGER = LogManager.getLogger(Retryer.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
 	private static final double EXP_COEF = 0.2;
 

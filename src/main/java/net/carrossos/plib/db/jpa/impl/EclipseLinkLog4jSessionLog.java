@@ -1,17 +1,16 @@
 package net.carrossos.plib.db.jpa.impl;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
 import org.eclipse.persistence.logging.AbstractSessionLog;
 import org.eclipse.persistence.logging.SessionLog;
 import org.eclipse.persistence.logging.SessionLogEntry;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 public class EclipseLinkLog4jSessionLog extends AbstractSessionLog {
 
-	private static final Logger LOGGER = LogManager.getLogger("org.eclipse.persistence");
+	private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger("org.eclipse.persistence");
 
 	@Override
 	public void log(SessionLogEntry entry) {
@@ -20,31 +19,48 @@ public class EclipseLinkLog4jSessionLog extends AbstractSessionLog {
 		if (entry.getNameSpace() == null) {
 			marker = null;
 		} else {
-			marker = MarkerManager.getMarker(entry.getNameSpace());
+			marker = MarkerFactory.getMarker(entry.getNameSpace());
 		}
 
-		LOGGER.log(convertLevel(entry.getLevel()), marker, () -> formatMessage(entry), entry.getException());
-	}
-
-	private static Level convertLevel(int level) {
 		switch (level) {
 		case SessionLog.SEVERE:
-			return Level.ERROR;
+			if (LOGGER.isErrorEnabled()) {
+				LOGGER.error(marker, formatMessage(entry), entry.getException());
+			}
+
+			return;
 		case SessionLog.WARNING:
-			return Level.WARN;
+			if (LOGGER.isWarnEnabled()) {
+				LOGGER.warn(marker, formatMessage(entry), entry.getException());
+			}
+
+			return;
 		case SessionLog.INFO:
-			return Level.INFO;
 		case SessionLog.CONFIG:
-			return Level.INFO;
+			if (LOGGER.isInfoEnabled()) {
+				LOGGER.info(marker, formatMessage(entry), entry.getException());
+			}
+
+			return;
 		case SessionLog.FINE:
-			return Level.DEBUG;
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(marker, formatMessage(entry), entry.getException());
+			}
+
+			return;
 		case SessionLog.FINER:
-			return Level.TRACE;
 		case SessionLog.FINEST:
-			return Level.TRACE;
+			if (LOGGER.isTraceEnabled()) {
+				LOGGER.trace(marker, formatMessage(entry), entry.getException());
+			}
+
+			return;
+
 		default:
-			throw new IllegalArgumentException("Unknown level: " + level);
+			LOGGER.warn(marker, "Unkown Eclipselink level {} for {}", level, formatMessage(entry),
+					entry.getException());
 		}
+
 	}
 
 }
