@@ -1,0 +1,9 @@
+/target/
+org.eclipse*
+.classpath
+.project
+/.settings/
+*.yml
+*.bat
+*.jar
+*.txt
