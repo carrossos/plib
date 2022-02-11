@@ -11,6 +11,27 @@
 	<name>plib</name>
 	<url>http://maven.apache.org</url>
 
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>carrossos</id>
+			<name>Carrossos</name>
+			<email>me@carrossos.net</email>
+		</developer>
+	</developers>
+	
+	<scm>
+		<connection>scm:git:git@github.com:carrossos/plib.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:carrossos/plib.git</developerConnection>
+		<url>https://github.com/carrossos/plib</url>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
