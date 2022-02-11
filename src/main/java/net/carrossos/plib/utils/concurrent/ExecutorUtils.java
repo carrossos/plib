@@ -30,6 +30,7 @@ public class ExecutorUtils {
 		try {
 			executor.awaitTermination(EXECUTOR_CLOSE_TIMEOUT, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
+			// Ignore further interruption
 		}
 	}
 
@@ -39,6 +40,7 @@ public class ExecutorUtils {
 		try {
 			executor.awaitTermination(EXECUTOR_CLOSE_TIMEOUT, TimeUnit.MINUTES);
 		} catch (InterruptedException e) {
+			// Ignore further interruption
 		}
 	}
 }

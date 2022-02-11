@@ -114,7 +114,7 @@ public abstract class Binding {
 					type = HashSet.class;
 				} else {
 					throw new PersistencyException(
-							"Unable to infer implementation type automatically for class " + type.getClass().getName());
+							"Unable to infer implementation type automatically for class " + type.getName());
 				}
 			}
 

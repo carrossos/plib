@@ -1,7 +1,7 @@
 package net.carrossos.plib.utils;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.function.IntPredicate;
 
 public class StringParser {
@@ -10,7 +10,7 @@ public class StringParser {
 
 	private int pos = 0;
 
-	private final Deque<IntPredicate> predicates = new LinkedList<>();
+	private final Deque<IntPredicate> predicates = new ArrayDeque<>();
 
 	private boolean consume0(CharSequence chars, boolean fail) {
 		int start = pos;

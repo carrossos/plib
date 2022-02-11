@@ -3,7 +3,7 @@ package net.carrossos.plib.utils.concurrent;
 import java.io.Closeable;
 import java.lang.invoke.MethodHandles;
 import java.time.Duration;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -29,7 +29,7 @@ public class Invoker implements Closeable {
 
 	private final ExecutorService executor;
 
-	private final List<CompletableFuture<Void>> completions = new LinkedList<>();
+	private final List<CompletableFuture<Void>> completions = new ArrayList<>();
 
 	private int failures;
 

@@ -21,7 +21,7 @@ import net.carrossos.plib.persistency.reader.ObjectReader;
 
 public class ObjectBinding extends Binding {
 
-	private class FieldConfig {
+	private static class FieldConfig {
 
 		public Class<?> type;
 
