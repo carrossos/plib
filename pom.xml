@@ -7,7 +7,9 @@
 	<artifactId>plib</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
-
+	<description>
+        lean Java utility library supporting domain applications
+    </description>
 	<name>plib</name>
 	<url>https://github.com/carrossos/plib</url>
 
