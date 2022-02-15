@@ -1,6 +1,7 @@
 # plib
 
-![Build](https://github.com/carrossos/plib/actions/workflows/maven.yml/badge.svg)
+![Build](https://github.com/carrossos/plib/actions/workflows/build.yml/badge.svg)
+![Publish](https://github.com/carrossos/plib/actions/workflows/publish.yml/badge.svg)
 
 plib: lean Java utility library supporting domain applications with:
 * POJO mapping with CSV/XSLX, including XSLX streaming for processing of large files
