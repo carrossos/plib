@@ -22,7 +22,7 @@ import net.carrossos.plib.persistency.reader.ObjectReader;
 
 public class CSVContainer extends Container {
 
-	private static final int MAX_READAHEAD = 3;
+	private static final String MAX_READAHEAD = "10";
 
 	public class CSVSpliterator implements Spliterator<RowReader> {
 
@@ -42,29 +42,30 @@ public class CSVContainer extends Container {
 
 		private List<String> tryParse() throws IOException {
 			String line = reader.readLine();
-			
+
 			if (line == null) {
 				return null;
 			}
-			
-			for (int i = 0; i < MAX_READAHEAD; i++) {
+
+			for (int i = 0; i < maxReadAhead; i++) {
 				try {
 					return split(separator, line, index);
 				} catch (IllegalArgumentException e) {
 					// Read ahead
 					line += "\n";
-					
+
 					String next = reader.readLine();
-					
+
 					if (next == null) {
 						throw new PersistencyException("Imbalanced quotes while reaching end of file");
 					}
-					
+
 					line += next;
 				}
 			}
 
-			throw new PersistencyException("Imbalanced quotes while reading ahead for " + MAX_READAHEAD + " lines");
+			throw new IOException(
+					"Imbalanced quotes while reading ahead for " + maxReadAhead + " lines: read so far: " + line);
 		}
 
 		@Override
@@ -108,6 +109,8 @@ public class CSVContainer extends Container {
 
 	private final char separator;
 
+	private final int maxReadAhead;
+
 	private final Map<String, Integer> schema = new HashMap<>();
 
 	private final RowReader rowReader = new RowReader(this, s -> schema.getOrDefault(s, -1));
@@ -133,6 +136,7 @@ public class CSVContainer extends Container {
 
 		this.reader = new BufferedReader(new InputStreamReader(input));
 		this.separator = parameters.key("separator").get().charAt(0);
+		this.maxReadAhead = parameters.key("max_readahead").orElse(MAX_READAHEAD).getInt();
 
 		int i = 0;
 		for (String attribute : split(separator, reader.readLine())) {

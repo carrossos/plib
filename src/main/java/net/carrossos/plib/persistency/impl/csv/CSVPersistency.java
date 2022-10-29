@@ -25,6 +25,10 @@ public class CSVPersistency extends Persistency {
 		map.add("separator", separator);
 	}
 
+	public void setReadAhead(int max) {
+		map.add("max_readahead", String.valueOf(max));
+	}
+	
 	public CSVPersistency(String name) {
 		super(name);
 	}
